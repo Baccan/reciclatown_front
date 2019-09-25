@@ -28,6 +28,23 @@ export default new Router({
         )
     },
     {
+      path: "/equipamentos/add",
+      name: "AddEquipamentos",
+      component: () =>
+        import(
+          /* webpackChunkName: "add-equipamentos" */ "./views/equipamentos/Add.vue"
+        )
+    },
+    {
+      path: "/equipamentos/:id",
+      name: "DetailEquipamentos",
+      props: true,
+      component: () =>
+        import(
+          /* webpackChunkName: "detail-equipamentos" */ "./views/equipamentos/Detail.vue"
+        )
+    },
+    {
       path: "/fornecedores",
       name: "ListFornecedores",
       component: () =>

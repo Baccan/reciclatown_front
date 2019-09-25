@@ -7,7 +7,7 @@
           <v-icon>build</v-icon>
         </div>
 
-        <v-btn color="success" to="/fornecedores/add">Adicionar</v-btn>
+        <v-btn color="success" to="/equipamentos/add">Adicionar ordem</v-btn>
       </div>
     </header>
     <div id="content">
@@ -15,7 +15,7 @@
         <template v-slot:default>
           <thead>
             <tr>
-              <th class="text-left">Tipo</th>
+              <!-- <th class="text-left">Tipo</th> -->
               <th class="text-left">Problema</th>
               <th class="text-left">Responsável</th>
               <th class="text-left">Telefone responsável</th>
@@ -27,16 +27,20 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="item in desserts" :key="item.name">
-              <td>Lixeira</td>
-              <td>{{ item.problem }}</td>
-              <td>{{ item.owner }}</td>
-              <td>{{ item.ownerContactNumber }}</td>
-              <td>{{ item.pulloutDate }}</td>
-              <td>{{ item.deliveryDate }}</td>
-              <td>{{ item.place }}</td>
-              <td>{{ item.number }}</td>
-              <td>{{ item.stats }}</td>
+            <tr
+              v-for="item in desserts"
+              :key="item.name"
+              @click="goToDetail(item)"
+            >
+              <!-- <td>Lixeira</td> -->
+              <td>{{ item.problemaReportado }}</td>
+              <td>{{ item.responsavelEquipamento }}</td>
+              <td>{{ item.telefoneResponsavel }}</td>
+              <td>{{ item.datahoraRetirada }}</td>
+              <td>{{ item.dataHoraEntrega }}</td>
+              <td>{{ item.localDeRetirada }}</td>
+              <td>{{ item.numeroEquipamento }}</td>
+              <td>{{ item.statusOrdem }}</td>
             </tr>
           </tbody>
         </template>
@@ -50,21 +54,30 @@ export default {
   data: () => ({
     desserts: [
       {
-        type: "Frozen Yogurt",
-        problem: "Tampa não está abrindo",
-        owner: "Gustavo Baccan",
+        id: 1,
+        // tipo: "Lixeira",
+        problemaReportado: "Tampa não está abrindo",
+        responsavelEquipamento: "Gustavo Baccan",
         // ownerContactNumber: 1199123123,
-        ownerContactNumber: "(11) 97743-8549",
-        place: "Edificio Vila Boa",
+        telefoneResponsavel: "(11) 97743-8549",
+        localDeRetirada: "Edificio Vila Boa",
         // pulloutDate: "2019-09-22 12:00:00",
         // deliveryDate: "2019-09-22 12:00:00",
-        pulloutDate: "01/01/2019",
-        deliveryDate: "01/01/2019",
-        number: 159,
-        stats: "Aberta"
+        datahoraRetirada: "01/01/2019",
+        dataHoraEntrega: "01/01/2019",
+        numeroEquipamento: 159,
+        statusOrdem: "Aberta"
       }
     ]
-  })
+  }),
+  methods: {
+    goToDetail(detail) {
+      this.$router.push({
+        name: "DetailEquipamentos",
+        params: { id: detail.id, detail }
+      });
+    }
+  }
 };
 </script>
 
@@ -97,7 +110,7 @@ header {
       }
     }
 
-    @media screen and (max-width: "400px") {
+    @media screen and (max-width: "500px") {
       flex-direction: column;
     }
   }
