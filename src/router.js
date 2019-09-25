@@ -12,13 +12,28 @@ export default new Router({
       component: Home
     },
     {
-      path: "/about",
-      name: "about",
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
+      path: "/funcionarios",
+      name: "ListFuncionarios",
       component: () =>
-        import(/* webpackChunkName: "about" */ "./views/About.vue")
+        import(
+          /* webpackChunkName: "funcioanrios" */ "./views/funcionarios/ListFuncionarios.vue"
+        )
+    },
+    {
+      path: "/equipamentos",
+      name: "ListEquipamentos",
+      component: () =>
+        import(
+          /* webpackChunkName: "equipamentos" */ "./views/equipamentos/ListEquipamentos.vue"
+        )
+    },
+    {
+      path: "/fornecedores",
+      name: "ListFornecedores",
+      component: () =>
+        import(
+          /* webpackChunkName: "fornecedores" */ "./views/fornecedores/ListFornecedores.vue"
+        )
     }
   ]
 });
