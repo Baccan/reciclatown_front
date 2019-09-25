@@ -34,6 +34,15 @@ export default new Router({
         import(
           /* webpackChunkName: "fornecedores" */ "./views/fornecedores/ListFornecedores.vue"
         )
+    },
+    {
+      path: "/fornecedores/:id",
+      name: "DetailFornecedores",
+      props: true,
+      component: () =>
+        import(
+          /* webpackChunkName: "detail-fornecedores" */ "./views/fornecedores/Detail.vue"
+        )
     }
   ]
 });

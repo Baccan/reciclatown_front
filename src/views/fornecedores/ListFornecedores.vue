@@ -16,7 +16,11 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="item in desserts" :key="item.name">
+            <tr
+              v-for="item in desserts"
+              :key="item.name"
+              @click="goToDetail(item)"
+            >
               <td>{{ item.name }}</td>
               <td>{{ item.cnpj }}</td>
               <td>{{ item.email }}</td>
@@ -34,13 +38,22 @@ export default {
   data: () => ({
     desserts: [
       {
+        id: 1,
         name: "Fabrica de Lixo",
         cnpj: "37081916718",
         email: "fabrica@email.com",
         contactNumber: "(11) 2733-1220"
       }
     ]
-  })
+  }),
+  methods: {
+    goToDetail(detail) {
+      this.$router.push({
+        name: "DetailFornecedores",
+        params: { id: detail.id, detail }
+      });
+    }
+  }
 };
 </script>
 
