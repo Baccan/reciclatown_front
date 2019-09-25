@@ -1,8 +1,14 @@
 <template>
   <div>
     <header>
-      <h1>Equipamentos</h1>
-      <v-icon>build</v-icon>
+      <div>
+        <div id="title">
+          <h1>Equipamentos</h1>
+          <v-icon>build</v-icon>
+        </div>
+
+        <v-btn color="success" to="/fornecedores/add">Adicionar</v-btn>
+      </div>
     </header>
     <div id="content">
       <v-simple-table id="table" dark fixed-header>
@@ -71,15 +77,29 @@ export default {
 /* #1b2e28 */
 
 header {
+  width: 100%;
+  margin-top: 30px;
   display: flex;
   justify-content: center;
-  margin-top: 30px;
-  h1 {
-    color: white;
-  }
-  i {
-    color: #00af5e !important;
-    margin-left: 10px;
+  div {
+    width: 90%;
+    display: flex;
+    #title {
+      display: flex;
+      flex-direction: row;
+
+      h1 {
+        color: white;
+      }
+      i {
+        color: #00af5e !important;
+        margin-left: 10px;
+      }
+    }
+
+    @media screen and (max-width: "400px") {
+      flex-direction: column;
+    }
   }
 }
 

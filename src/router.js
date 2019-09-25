@@ -36,6 +36,15 @@ export default new Router({
         )
     },
     {
+      path: "/fornecedores/add",
+      name: "AddFornecedores",
+      props: true,
+      component: () =>
+        import(
+          /* webpackChunkName: "add-fornecedores" */ "./views/fornecedores/Add.vue"
+        )
+    },
+    {
       path: "/fornecedores/:id",
       name: "DetailFornecedores",
       props: true,
