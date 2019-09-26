@@ -23,14 +23,14 @@
           </thead>
           <tbody>
             <tr
-              v-for="item in desserts"
+              v-for="item in fornecedores"
               :key="item.name"
               @click="goToDetail(item)"
             >
-              <td>{{ item.name }}</td>
-              <td>{{ item.cnpj }}</td>
+              <td>{{ item.nome }}</td>
+              <td>{{ item.cpfCnpj }}</td>
               <td>{{ item.email }}</td>
-              <td>{{ item.contactNumber }}</td>
+              <td>{{ item.telefone }}</td>
             </tr>
           </tbody>
         </template>
@@ -40,19 +40,36 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   data: () => ({
-    desserts: [
-      {
-        id: 1,
-        name: "Fabrica de Lixo",
-        cnpj: "37081916718",
-        email: "fabrica@email.com",
-        contactNumber: "(11) 2733-1220"
-      }
-    ]
+    fornecedores: [{}]
   }),
+  mounted() {
+    this.getFornecedores();
+  },
   methods: {
+    async getFornecedores() {
+      axios
+        .get(
+          "http://ip172-18-0-33-bm623uljvt4000es24lg-10000.direct.labs.play-with-docker.com:10000/fornecedores"
+        )
+        .then(response => {
+          this.fornecedores = response.data;
+          console.log(this.fornecedores);
+        })
+        .catch(function(error) {
+          if (error.response) {
+            console.log(error.response.headers);
+          } else if (error.request) {
+            console.log(error.request);
+          } else {
+            console.log(error.message);
+          }
+          console.log(error.config);
+        });
+    },
     goToDetail(detail) {
       this.$router.push({
         name: "DetailFornecedores",

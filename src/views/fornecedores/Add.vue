@@ -11,8 +11,8 @@
             <v-col cols="12" md="8">
               <v-text-field
                 dark
-                v-model="name"
-                :rules="nameRules"
+                v-model="nome"
+                :rules="nomeRules"
                 label="Nome"
                 required
               ></v-text-field>
@@ -21,8 +21,8 @@
             <v-col cols="12" md="4">
               <v-text-field
                 dark
-                v-model="cnpj"
-                :rules="cnpjRules"
+                v-model="cpfCnpj"
+                :rules="cpfCnpjRules"
                 label="CNPJ"
                 required
               ></v-text-field>
@@ -41,8 +41,8 @@
             <v-col cols="12" md="4">
               <v-text-field
                 dark
-                v-model="contactNumber"
-                :rules="contactNumberRules"
+                v-model="telefone"
+                :rules="telefoneRules"
                 label="Telefone"
                 required
               ></v-text-field>
@@ -66,28 +66,52 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   data: () => ({
     valid: false,
-    name: "",
-    nameRules: [v => !!v || "Name é obrigatório"],
+    nome: "",
+    nomeRules: [v => !!v || "Nome é obrigatório"],
     email: "",
     emailRules: [
       v => !!v || "E-mail é obrigatório",
       v => /.+@.+/.test(v) || "Deve ser um e-mail válido"
     ],
-    cnpj: "",
-    cnpjRules: [v => !!v || "CNPJ é obrigatório"],
-    contactNumber: "",
-    contactNumberRules: [v => !!v || "Telefone é obrigatório"]
+    cpfCnpj: "",
+    cpfCnpjRules: [v => !!v || "CNPJ é obrigatório"],
+    telefone: "",
+    telefoneRules: [v => !!v || "Telefone é obrigatório"]
   }),
 
   created() {},
 
   methods: {
-    validate() {
+    async validate() {
       if (this.$refs.form.validate()) {
-        console.log("hi");
+        await axios
+          .post(
+            "http://ip172-18-0-33-bm623uljvt4000es24lg-10000.direct.labs.play-with-docker.com:10000/fornecedores",
+            {
+              nome: this.nome,
+              cpfCnpj: this.cpfCnpj,
+              email: this.email,
+              telefone: this.telefone
+            }
+          )
+          .then(response => {
+            console.log(response.data);
+          })
+          .catch(function(error) {
+            if (error.response) {
+              console.log(error.response.headers);
+            } else if (error.request) {
+              console.log(error.request);
+            } else {
+              console.log(error.message);
+            }
+            console.log(error.config);
+          });
       }
     },
     reset() {

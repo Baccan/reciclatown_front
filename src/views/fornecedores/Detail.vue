@@ -14,8 +14,8 @@
             <v-col cols="12" md="8">
               <v-text-field
                 dark
-                v-model="detail.name"
-                :rules="nameRules"
+                v-model="detail.nome"
+                :rules="nomeRules"
                 label="Nome"
                 required
               ></v-text-field>
@@ -24,9 +24,9 @@
             <v-col cols="12" md="4">
               <v-text-field
                 dark
-                v-model="detail.cnpj"
-                :rules="cnpjRules"
-                label="CNPJ"
+                v-model="detail.cpfCnpj"
+                :rules="cpfCnpjRules"
+                label="CPF - CNPJ"
                 required
               ></v-text-field>
             </v-col>
@@ -44,8 +44,8 @@
             <v-col cols="12" md="4">
               <v-text-field
                 dark
-                v-model="detail.contactNumber"
-                :rules="contactNumberRules"
+                v-model="detail.telefone"
+                :rules="telefoneRules"
                 label="Telefone"
                 required
               ></v-text-field>
@@ -69,18 +69,20 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   props: ["detail"],
 
   data: () => ({
     valid: false,
-    nameRules: [v => !!v || "Name é obrigatório"],
+    nomeRules: [v => !!v || "Nome é obrigatório"],
     emailRules: [
       v => !!v || "E-mail é obrigatório",
       v => /.+@.+/.test(v) || "Deve ser um e-mail válido"
     ],
-    cnpjRules: [v => !!v || "CNPJ é obrigatório"],
-    contactNumberRules: [v => !!v || "Telefone é obrigatório"]
+    cpfCnpjRules: [v => !!v || "Cpf ou Cnpj é obrigatório"],
+    telefoneRules: [v => !!v || "Telefone é obrigatório"]
   }),
 
   created() {
@@ -90,9 +92,32 @@ export default {
   },
 
   methods: {
-    validate() {
+    async validate() {
       if (this.$refs.form.validate()) {
         console.log("hi");
+        await axios
+          .put(
+            `http://ip172-18-0-33-bm623uljvt4000es24lg-10000.direct.labs.play-with-docker.com:10000/fornecedores/${this.detail.id}`,
+            {
+              nome: this.nome,
+              cpfCnpj: this.cpfCnpj,
+              email: this.email,
+              telefone: this.telefone
+            }
+          )
+          .then(response => {
+            console.log(response.data);
+          })
+          .catch(function(error) {
+            if (error.response) {
+              console.log(error.response.headers);
+            } else if (error.request) {
+              console.log(error.request);
+            } else {
+              console.log(error.message);
+            }
+            console.log(error.config);
+          });
       }
     },
     reset() {

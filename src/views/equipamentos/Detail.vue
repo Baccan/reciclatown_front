@@ -99,6 +99,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   props: ["detail"],
 
@@ -137,9 +139,36 @@ export default {
   },
 
   methods: {
-    validate() {
+    async validate() {
       if (this.$refs.form.validate()) {
-        console.log("hi");
+        await axios
+          .put(
+            `http://ec2-3-14-152-46.us-east-2.compute.amazonaws.com:10002/ordens_manutencao`,
+            {
+              id: this.detail.id,
+              numeroEquipamento: this.numeroEquipamento,
+              problemaReportado: this.problemaReportado,
+              localDeRetirada: this.localDeRetirada,
+              responsavelEquipamento: this.responsavelEquipamento,
+              datahoraRetirada: this.datahoraRetirada,
+              dataHoraEntrega: this.dataHoraEntrega,
+              telefoneResponsavel: this.telefoneResponsavel,
+              statusOrdem: "Em Análise"
+            }
+          )
+          .then(response => {
+            console.log(response.data);
+          })
+          .catch(function(error) {
+            if (error.response) {
+              console.log(error.response.headers);
+            } else if (error.request) {
+              console.log(error.request);
+            } else {
+              console.log(error.message);
+            }
+            console.log(error.config);
+          });
       }
     },
     reset() {

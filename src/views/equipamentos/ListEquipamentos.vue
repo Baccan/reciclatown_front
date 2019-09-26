@@ -28,7 +28,7 @@
           </thead>
           <tbody>
             <tr
-              v-for="item in desserts"
+              v-for="item in equipamentos"
               :key="item.name"
               @click="goToDetail(item)"
             >
@@ -50,27 +50,53 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   data: () => ({
-    desserts: [
-      {
-        id: 1,
-        // tipo: "Lixeira",
-        problemaReportado: "Tampa não está abrindo",
-        responsavelEquipamento: "Gustavo Baccan",
-        // ownerContactNumber: 1199123123,
-        telefoneResponsavel: "(11) 97743-8549",
-        localDeRetirada: "Edificio Vila Boa",
-        // pulloutDate: "2019-09-22 12:00:00",
-        // deliveryDate: "2019-09-22 12:00:00",
-        datahoraRetirada: "01/01/2019",
-        dataHoraEntrega: "01/01/2019",
-        numeroEquipamento: 159,
-        statusOrdem: "Aberta"
-      }
-    ]
+    equipamentos: [{}]
+    // desserts: [
+    //   {
+    //     id: 1,
+    //     // tipo: "Lixeira",
+    //     problemaReportado: "Tampa não está abrindo",
+    //     responsavelEquipamento: "Gustavo Baccan",
+    //     // ownerContactNumber: 1199123123,
+    //     telefoneResponsavel: "(11) 97743-8549",
+    //     localDeRetirada: "Edificio Vila Boa",
+    //     // pulloutDate: "2019-09-22 12:00:00",
+    //     // deliveryDate: "2019-09-22 12:00:00",
+    //     datahoraRetirada: "01/01/2019",
+    //     dataHoraEntrega: "01/01/2019",
+    //     numeroEquipamento: 159,
+    //     statusOrdem: "Aberta"
+    //   }
+    // ]
   }),
+  mounted() {
+    this.getEquipamentos();
+  },
   methods: {
+    async getEquipamentos() {
+      axios
+        .get(
+          "http://ec2-3-14-152-46.us-east-2.compute.amazonaws.com:10002/ordens_manutencao"
+        )
+        .then(response => {
+          this.equipamentos = response.data;
+          console.log(this.equipamentos);
+        })
+        .catch(function(error) {
+          if (error.response) {
+            console.log(error.response.headers);
+          } else if (error.request) {
+            console.log(error.request);
+          } else {
+            console.log(error.message);
+          }
+          console.log(error.config);
+        });
+    },
     goToDetail(detail) {
       this.$router.push({
         name: "DetailEquipamentos",
