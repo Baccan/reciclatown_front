@@ -29,11 +29,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr
-              v-for="item in equipamentos"
-              :key="item.name"
-              @click="goToDetail(item)"
-            >
+            <tr v-for="item in equipamentos" :key="item.name">
               <template
                 v-if="
                   item.problemaReportado ||
@@ -121,7 +117,7 @@ export default {
     },
     async deleteEquipamentos(id) {
       axios
-        .delete(`http://18.217.149.81:10000/ordens_manutencao/${id}`)
+        .delete(`http://18.217.149.81:10002/ordens_manutencao/${id}`)
         .then(response => {
           this.getEquipamentos();
           console.log(response);

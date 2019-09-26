@@ -155,6 +155,7 @@ export default {
           })
           .then(response => {
             console.log(response.data);
+            this.$router.push("/equipamentos");
           })
           .catch(function(error) {
             if (error.response) {
