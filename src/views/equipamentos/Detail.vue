@@ -142,20 +142,17 @@ export default {
     async validate() {
       if (this.$refs.form.validate()) {
         await axios
-          .put(
-            `http://ec2-3-14-152-46.us-east-2.compute.amazonaws.com:10002/ordens_manutencao`,
-            {
-              id: this.detail.id,
-              numeroEquipamento: this.numeroEquipamento,
-              problemaReportado: this.problemaReportado,
-              localDeRetirada: this.localDeRetirada,
-              responsavelEquipamento: this.responsavelEquipamento,
-              datahoraRetirada: this.datahoraRetirada,
-              dataHoraEntrega: this.dataHoraEntrega,
-              telefoneResponsavel: this.telefoneResponsavel,
-              statusOrdem: "Em Análise"
-            }
-          )
+          .put(`http:localhost:10002/ordens_manutencao`, {
+            id: this.detail.id,
+            numeroEquipamento: this.numeroEquipamento,
+            problemaReportado: this.problemaReportado,
+            localDeRetirada: this.localDeRetirada,
+            responsavelEquipamento: this.responsavelEquipamento,
+            datahoraRetirada: this.datahoraRetirada,
+            dataHoraEntrega: this.dataHoraEntrega,
+            telefoneResponsavel: this.telefoneResponsavel,
+            statusOrdem: "Em Análise"
+          })
           .then(response => {
             console.log(response.data);
           })

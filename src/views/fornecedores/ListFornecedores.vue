@@ -52,9 +52,7 @@ export default {
   methods: {
     async getFornecedores() {
       axios
-        .get(
-          "http://ip172-18-0-33-bm623uljvt4000es24lg-10000.direct.labs.play-with-docker.com:10000/fornecedores"
-        )
+        .get("http:localhost:10000/fornecedores")
         .then(response => {
           this.fornecedores = response.data;
           console.log(this.fornecedores);

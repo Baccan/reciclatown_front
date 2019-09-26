@@ -96,15 +96,12 @@ export default {
       if (this.$refs.form.validate()) {
         console.log("hi");
         await axios
-          .put(
-            `http://ip172-18-0-33-bm623uljvt4000es24lg-10000.direct.labs.play-with-docker.com:10000/fornecedores/${this.detail.id}`,
-            {
-              nome: this.nome,
-              cpfCnpj: this.cpfCnpj,
-              email: this.email,
-              telefone: this.telefone
-            }
-          )
+          .put(`http:localhost:10000/fornecedores/${this.detail.id}`, {
+            nome: this.nome,
+            cpfCnpj: this.cpfCnpj,
+            email: this.email,
+            telefone: this.telefone
+          })
           .then(response => {
             console.log(response.data);
           })

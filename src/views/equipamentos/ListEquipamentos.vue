@@ -79,9 +79,7 @@ export default {
   methods: {
     async getEquipamentos() {
       axios
-        .get(
-          "http://ec2-3-14-152-46.us-east-2.compute.amazonaws.com:10002/ordens_manutencao"
-        )
+        .get("http:localhost:10002/ordens_manutencao")
         .then(response => {
           this.equipamentos = response.data;
           console.log(this.equipamentos);
