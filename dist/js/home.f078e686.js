@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["home"],{"0087":function(e,t,n){"use strict";var c=n("60e2"),a=n.n(c);a.a},"60e2":function(e,t,n){},bb51:function(e,t,n){"use strict";n.r(t);var c=function(){var e=this,t=e.$createElement;e._self._c;return e._m(0)},a=[function(){var e=this,t=e.$createElement,n=e._self._c||t;return n("div",[n("div",{attrs:{id:"content"}},[n("h1",[e._v("ReciclaTown")])])])}],i={data:()=>({})},r=i,o=(n("0087"),n("2877")),s=Object(o["a"])(r,c,a,!1,null,"0c008e76",null);t["default"]=s.exports}}]);
+//# sourceMappingURL=home.f078e686.js.map
