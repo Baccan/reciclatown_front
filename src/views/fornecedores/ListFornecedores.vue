@@ -52,7 +52,7 @@ export default {
   methods: {
     async getFornecedores() {
       axios
-        .get("http:localhost:10000/fornecedores")
+        .get("http://localhost:10000/fornecedores")
         .then(response => {
           this.fornecedores = response.data;
           console.log(this.fornecedores);

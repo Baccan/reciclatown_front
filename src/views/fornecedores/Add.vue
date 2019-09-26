@@ -90,7 +90,7 @@ export default {
     async validate() {
       if (this.$refs.form.validate()) {
         await axios
-          .post("http:localhost:10000/fornecedores", {
+          .post("http://localhost:10000/fornecedores", {
             nome: this.nome,
             cpfCnpj: this.cpfCnpj,
             email: this.email,

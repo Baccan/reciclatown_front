@@ -141,7 +141,7 @@ export default {
     async validate() {
       if (this.$refs.form.validate()) {
         await axios
-          .post("http:localhost:10002/ordens_manutencao", {
+          .post("http://localhost:10002/ordens_manutencao", {
             numeroEquipamento: this.numeroEquipamento,
             problemaReportado: this.problemaReportado,
             localDeRetirada: this.localDeRetirada,
