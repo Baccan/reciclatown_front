@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <Menu />
+    <Menu v-if="showMenu()" />
 
     <v-content id="content">
       <router-view />
@@ -13,11 +13,15 @@ import Menu from "@/components/Header/Menu";
 
 export default {
   name: "App",
-  data: () => ({
-    //
-  }),
+  data: () => ({}),
   components: {
     Menu
+  },
+  methods: {
+    showMenu() {
+      if (this.$route.path === "/") return false;
+      return true;
+    }
   }
 };
 </script>

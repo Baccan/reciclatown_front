@@ -21,7 +21,7 @@
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title>ReciclaTown</v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn text>Sair <v-icon>logout</v-icon></v-btn>
+      <v-btn text to="/">Sair <v-icon>logout</v-icon></v-btn>
     </v-app-bar>
   </div>
 </template>
@@ -34,7 +34,7 @@ export default {
       {
         title: "Início",
         icon: "home",
-        route: "/"
+        route: "/home"
       },
       {
         title: "Funcionários",
