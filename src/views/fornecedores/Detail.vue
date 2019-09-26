@@ -96,7 +96,7 @@ export default {
       if (this.$refs.form.validate()) {
         console.log("hi");
         await axios
-          .put(`http://localhost:10000/fornecedores/${this.detail.id}`, {
+          .put(`http://18.217.149.81:10000/fornecedores/${this.detail.id}`, {
             nome: this.nome,
             cpfCnpj: this.cpfCnpj,
             email: this.email,

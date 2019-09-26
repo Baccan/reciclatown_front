@@ -79,7 +79,7 @@ export default {
   methods: {
     async getEquipamentos() {
       axios
-        .get("http://localhost:10002/ordens_manutencao")
+        .get("http://18.217.149.81:10002/ordens_manutencao")
         .then(response => {
           this.equipamentos = response.data;
           console.log(this.equipamentos);
