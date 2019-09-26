@@ -106,27 +106,27 @@ export default {
 
   data: () => ({
     valid: false,
-    numeroEquipamento: "",
+    // numeroEquipamento: "",
     numeroEquipamentoRules: [v => !!v || "Número do equipamento é obrigatório"],
 
-    problemaReportado: "",
+    // problemaReportado: "",
     problemaReportadoRules: [v => !!v || "Problema reportado é obrigatório"],
 
-    localDeRetirada: "",
+    // localDeRetirada: "",
     localDeRetiradaRules: [v => !!v || "Local de Retirada é obrigatório"],
 
-    responsavelEquipamento: "",
+    // responsavelEquipamento: "",
     responsavelEquipamentoRules: [
       v => !!v || "Responsável pelo equipamento é obrigatório"
     ],
 
-    datahoraRetirada: "",
+    // datahoraRetirada: "",
     datahoraRetiradaRules: [v => !!v || "Data de retirada é obrigatória"],
 
-    dataHoraEntrega: "",
+    // dataHoraEntrega: "",
     dataHoraEntregaRules: [v => !!v || "Data de entrega é obrigatória"],
 
-    telefoneResponsavel: "",
+    // telefoneResponsavel: "",
     telefoneResponsavelRules: [
       v => !!v || "Telefone do responsável é obrigatório"
     ]
@@ -144,13 +144,13 @@ export default {
         await axios
           .put(`http://18.217.149.81:10002/ordens_manutencao`, {
             id: this.detail.id,
-            numeroEquipamento: this.numeroEquipamento,
-            problemaReportado: this.problemaReportado,
-            localDeRetirada: this.localDeRetirada,
-            responsavelEquipamento: this.responsavelEquipamento,
-            datahoraRetirada: this.datahoraRetirada,
-            dataHoraEntrega: this.dataHoraEntrega,
-            telefoneResponsavel: this.telefoneResponsavel,
+            numeroEquipamento: this.detail.numeroEquipamento,
+            problemaReportado: this.detail.problemaReportado,
+            localDeRetirada: this.detail.localDeRetirada,
+            responsavelEquipamento: this.detail.responsavelEquipamento,
+            datahoraRetirada: this.detail.datahoraRetirada,
+            dataHoraEntrega: this.detail.dataHoraEntrega,
+            telefoneResponsavel: this.detail.telefoneResponsavel,
             statusOrdem: "Em Análise"
           })
           .then(response => {

@@ -24,6 +24,8 @@
               <th class="text-left">Local de retirada</th>
               <th class="text-left">Número</th>
               <th class="text-left">Status</th>
+              <th class="text-center">Editar</th>
+              <th class="text-center">Deletar</th>
             </tr>
           </thead>
           <tbody>
@@ -32,15 +34,37 @@
               :key="item.name"
               @click="goToDetail(item)"
             >
-              <!-- <td>Lixeira</td> -->
-              <td>{{ item.problemaReportado }}</td>
-              <td>{{ item.responsavelEquipamento }}</td>
-              <td>{{ item.telefoneResponsavel }}</td>
-              <td>{{ item.datahoraRetirada }}</td>
-              <td>{{ item.dataHoraEntrega }}</td>
-              <td>{{ item.localDeRetirada }}</td>
-              <td>{{ item.numeroEquipamento }}</td>
-              <td>{{ item.statusOrdem }}</td>
+              <template
+                v-if="
+                  item.problemaReportado ||
+                    item.responsavelEquipamento ||
+                    item.telefoneResponsavel ||
+                    item.datahoraRetirada ||
+                    item.dataHoraEntrega ||
+                    item.localDeRetirada ||
+                    item.numeroEquipamento
+                "
+              >
+                <!-- <td>Lixeira</td> -->
+                <td>{{ item.problemaReportado }}</td>
+                <td>{{ item.responsavelEquipamento }}</td>
+                <td>{{ item.telefoneResponsavel }}</td>
+                <td>{{ item.datahoraRetirada }}</td>
+                <td>{{ item.dataHoraEntrega }}</td>
+                <td>{{ item.localDeRetirada }}</td>
+                <td>{{ item.numeroEquipamento }}</td>
+                <td>{{ item.statusOrdem }}</td>
+                <td class="text-center">
+                  <v-btn @click="goToDetail(item)" color="success"
+                    ><v-icon>edit</v-icon></v-btn
+                  >
+                </td>
+                <td class="text-center">
+                  <v-btn @click="deleteEquipamentos(item.id)" color="error"
+                    ><v-icon>delete</v-icon></v-btn
+                  >
+                </td>
+              </template>
             </tr>
           </tbody>
         </template>
@@ -83,6 +107,24 @@ export default {
         .then(response => {
           this.equipamentos = response.data;
           console.log(this.equipamentos);
+        })
+        .catch(function(error) {
+          if (error.response) {
+            console.log(error.response.headers);
+          } else if (error.request) {
+            console.log(error.request);
+          } else {
+            console.log(error.message);
+          }
+          console.log(error.config);
+        });
+    },
+    async deleteEquipamentos(id) {
+      axios
+        .delete(`http://18.217.149.81:10000/ordens_manutencao/${id}`)
+        .then(response => {
+          this.getEquipamentos();
+          console.log(response);
         })
         .catch(function(error) {
           if (error.response) {

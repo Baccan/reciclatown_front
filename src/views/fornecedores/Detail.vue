@@ -94,16 +94,17 @@ export default {
   methods: {
     async validate() {
       if (this.$refs.form.validate()) {
-        console.log("hi");
         await axios
           .put(`http://18.217.149.81:10000/fornecedores/${this.detail.id}`, {
-            nome: this.nome,
-            cpfCnpj: this.cpfCnpj,
-            email: this.email,
-            telefone: this.telefone
+            id: this.detail.id,
+            nome: this.detail.nome,
+            cpfCnpj: this.detail.cpfCnpj,
+            email: this.detail.email,
+            telefone: this.detail.telefone
           })
           .then(response => {
             console.log(response.data);
+            this.$router.push("/fornecedores");
           })
           .catch(function(error) {
             if (error.response) {

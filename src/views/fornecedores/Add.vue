@@ -98,6 +98,7 @@ export default {
           })
           .then(response => {
             console.log(response.data);
+            this.$router.push("/fornecedores");
           })
           .catch(function(error) {
             if (error.response) {

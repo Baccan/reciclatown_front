@@ -11,7 +11,7 @@
       </div>
     </header>
     <div id="content">
-      <v-simple-table id="table" dark fixed-header>
+      <v-simple-table id="table" dark fixed-header loading>
         <template v-slot:default>
           <thead>
             <tr>
@@ -19,18 +19,30 @@
               <th class="text-left">CNPJ</th>
               <th class="text-left">E-mail</th>
               <th class="text-left">Telefone</th>
+              <th class="text-center">Editar</th>
+              <th class="text-center">Excluir</th>
             </tr>
           </thead>
           <tbody>
-            <tr
-              v-for="item in fornecedores"
-              :key="item.name"
-              @click="goToDetail(item)"
-            >
-              <td>{{ item.nome }}</td>
-              <td>{{ item.cpfCnpj }}</td>
-              <td>{{ item.email }}</td>
-              <td>{{ item.telefone }}</td>
+            <tr v-for="item in fornecedores" :key="item.name">
+              <template
+                v-if="item.nome || item.cpfCnpj || item.email || item.telefone"
+              >
+                <td>{{ item.nome }}</td>
+                <td>{{ item.cpfCnpj }}</td>
+                <td>{{ item.email }}</td>
+                <td>{{ item.telefone }}</td>
+                <td class="text-center">
+                  <v-btn @click="goToDetail(item)" color="success"
+                    ><v-icon>edit</v-icon></v-btn
+                  >
+                </td>
+                <td class="text-center">
+                  <v-btn @click="deleteFornecedores(item.id)" color="error"
+                    ><v-icon>delete</v-icon></v-btn
+                  >
+                </td>
+              </template>
             </tr>
           </tbody>
         </template>
@@ -56,6 +68,24 @@ export default {
         .then(response => {
           this.fornecedores = response.data;
           console.log(this.fornecedores);
+        })
+        .catch(function(error) {
+          if (error.response) {
+            console.log(error.response.headers);
+          } else if (error.request) {
+            console.log(error.request);
+          } else {
+            console.log(error.message);
+          }
+          console.log(error.config);
+        });
+    },
+    async deleteFornecedores(id) {
+      axios
+        .delete(`http://18.217.149.81:10000/fornecedores/${id}`)
+        .then(response => {
+          this.getFornecedores();
+          console.log(response);
         })
         .catch(function(error) {
           if (error.response) {
